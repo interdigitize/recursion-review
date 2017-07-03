@@ -10,23 +10,19 @@ var getElementsByClassName = function(className
   var output = [];
   //define helper function
   var visitEachNode = function(node) {
-    //get the childnodes for the current node
-    var children = node.childNodes;
-    //iterate the nodes
-    for (var i = 0; i < children.length; i++) {
-      //if has classname
-      if (_.contains(children[i].classList, className)) {
-        //add to the nodelist array
-        output.push(children[i]);
-      }
-      //if node has any childen
-      if (node.childNodes) {
-        //run visetEachNode
+    if (_.contains(node.classList, className)) {
+      //add to the nodelist array
+      output.push(node);
+    }
+    if (node.childNodes) {
+      //get the childnodes for the current node
+      var children = node.childNodes;
+      //iterate the nodes
+      for (var i = 0; i < children.length; i++) {  
         visitEachNode(children[i]);        
       }
     }  
   };
-
   //call function on body
   visitEachNode(document.body);
   //return array
